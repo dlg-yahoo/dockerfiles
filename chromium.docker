@@ -22,9 +22,9 @@ ENV PATH $PATH:$DEPOT_TOOLS
 RUN echo -e "\n# Add Chromium's depot_tools to the PATH." >> .bashrc
 RUN echo "export PATH=\"\$PATH:$DEPOT_TOOLS\"" >> .bashrc
 
-# Download Chromium sources.
-RUN fetch chromium --nosvn=True
+# Download Chromium tip sources.
+RUN fetch --nohooks blink
 WORKDIR src
 
-# Build Chromium
-RUN ninja -C out/Release chrome -j18
+# Build Blink
+RUN ninja -C out/Release
