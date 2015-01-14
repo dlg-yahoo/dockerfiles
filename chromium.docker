@@ -6,7 +6,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty multiverse" >> /etc/apt/so
 RUN apt-get update && apt-get install -qy git build-essential clang curl
 RUN curl -L https://src.chromium.org/chrome/trunk/src/build/install-build-deps.sh > /tmp/install-build-deps.sh
 RUN chmod +x /tmp/install-build-deps.sh
-RUN /tmp/install-build-deps.sh --no-prompt --no-arm --no-chromeos-fonts --no-nacl
+RUN /tmp/install-build-deps.sh --no-prompt --arm --no-chromeos-fonts --nacl
 RUN rm /tmp/install-build-deps.sh
 
 # Don't build as root.
@@ -23,7 +23,7 @@ RUN echo -e "\n# Add Chromium's depot_tools to the PATH." >> .bashrc
 RUN echo "export PATH=\"\$PATH:$DEPOT_TOOLS\"" >> .bashrc
 
 # Download Chromium sources.
-RUN fetch chromium --nosvn=True
+RUN fetch blink --nohooks
 WORKDIR src
 
 # Build Chromium
